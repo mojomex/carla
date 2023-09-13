@@ -45,8 +45,16 @@ namespace rpc {
     Bridge       =   26u,
     RailTrack    =   27u,
     GuardRail    =   28u,
+    // turn signal labels
+    TurnSignalLeft  = 29u,
+    TurnSignalRight = 30u,
+    BrakeLight      = 31u,
+    HazardLights    = 32u,
+    BrakeLeft       = 33u,
+    BrakeRight      = 34u,
+    BrakeHazard     = 35u,
 
-    Any          =  0xFF
+    Any             = 0xFF
   };
 
 } // namespace rpc

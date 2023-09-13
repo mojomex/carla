@@ -7,6 +7,14 @@ Util/Build
 Install
 Plugins
 !Unreal/CarlaUE4/Plugins
+Content
+boost-*
+*.tar.gz
+
+.docker-home
+
+CrashContext.runtime-xml
+Diagnostics.txt
 
 /ExportedMaps
 /Import/*

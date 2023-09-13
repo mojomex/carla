@@ -48,7 +48,16 @@ namespace detail {
         { 81u,   0u,  81u},   // ground        =  25u
         {150u, 100u, 100u},   // bridge        =  26u
         {230u, 150u, 140u},   // rail track    =  27u
-        {180u, 165u, 180u}    // guard rail    =  28u
+        {180u, 165u, 180u},   // guard rail    =  28u
+        // turn signals
+        { 90u,   0u,   0u},   // left turn sig =  29u
+        {  0u,  90u,   0u},   // right turn sig=  30u
+        {  0u,  00u,  90u},   // brake light   =  31u
+        { 90u,  90u,   0u},   // HazardLights  =  32u,
+        { 90u,   0u,  90u},   // BrakeLeft     =  33u,
+        {  0u,  90u,  90u},   // BrakeRight    =  34u,
+        { 90u,  90u,  90u},   // BrakeHazard   =  35u,
+
       };
 
 } // namespace detail

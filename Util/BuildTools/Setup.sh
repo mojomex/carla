@@ -124,7 +124,7 @@ BOOST_BASENAME="boost-${BOOST_VERSION}-${CXX_TAG}"
 BOOST_INCLUDE=${PWD}/${BOOST_BASENAME}-install/include
 BOOST_LIBPATH=${PWD}/${BOOST_BASENAME}-install/lib
 
-for PY_VERSION in ${PY_VERSION_LIST[@]} ; do
+for PY_VERSION in "${PY_VERSION_LIST[@]}" ; do
 
   SHOULD_BUILD_BOOST=true
   PYTHON_VERSION=$(/usr/bin/env python${PY_VERSION} -V 2>&1)
@@ -142,8 +142,13 @@ for PY_VERSION in ${PY_VERSION_LIST[@]} ; do
 
     BOOST_PACKAGE_BASENAME=boost_${BOOST_VERSION//./_}
 
-    log "Retrieving boost."
-    wget "https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
+    if [[ ! -f "${BOOST_PACKAGE_BASENAME}.tar.gz" ]] ; then
+      log "Retrieving boost."
+      wget "https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
+    else
+      log "Found boost, not downloading."
+    fi
+
     # try to use the backup boost we have in Jenkins
     if [[ ! -f "${BOOST_PACKAGE_BASENAME}.tar.gz" ]] ; then
       log "Using boost backup"

@@ -10,10 +10,12 @@
 
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Containers/UnrealString.h"
 #include "Engine/SkeletalMesh.h"
 #include "Engine/StaticMesh.h"
 #include "EngineUtils.h"
 #include "PhysicsEngine/PhysicsAsset.h"
+#include "Vehicle/VehicleLightState.h"
 
 namespace crp = carla::rpc;
 
@@ -109,7 +111,15 @@ void ATagger::TagActor(const AActor &Actor, bool bTagForSemanticSegmentation)
   TArray<UStaticMeshComponent *> StaticMeshComponents;
   Actor.GetComponents<UStaticMeshComponent>(StaticMeshComponents);
   for (UStaticMeshComponent *Component : StaticMeshComponents) {
-    auto Label = GetLabelByPath(Component->GetStaticMesh());
+    bool IsLight = Component->GetName().Contains(TEXT("light"), ESearchCase::IgnoreCase, ESearchDir::FromStart);
+
+    auto Label = crp::CityObjectLabel::None;
+    if (IsLight) {
+      Label = crp::CityObjectLabel::TurnSignalLeft;
+    } else {
+      Label = GetLabelByPath(Component->GetStaticMesh());
+    }
+
     if (Label == crp::CityObjectLabel::Pedestrians &&
         Cast<ACarlaWheeledVehicle>(&Actor))
     {
@@ -164,7 +174,15 @@ void ATagger::TagActor(const AActor &Actor, bool bTagForSemanticSegmentation)
   TArray<USkeletalMeshComponent *> SkeletalMeshComponents;
   Actor.GetComponents<USkeletalMeshComponent>(SkeletalMeshComponents);
   for (USkeletalMeshComponent *Component : SkeletalMeshComponents) {
-    auto Label = GetLabelByPath(Component->GetPhysicsAsset());
+    bool IsLight = Component->GetName().Contains(TEXT("light"), ESearchCase::IgnoreCase, ESearchDir::FromStart);
+
+    auto Label = crp::CityObjectLabel::None;
+    if (IsLight) {
+      Label = crp::CityObjectLabel::TurnSignalLeft;
+    } else {
+      Label = GetLabelByPath(Component->GetPhysicsAsset());
+    }
+
     if (Label == crp::CityObjectLabel::Pedestrians &&
         Cast<ACarlaWheeledVehicle>(&Actor))
     {
@@ -279,6 +297,13 @@ FString ATagger::GetTagAsString(const crp::CityObjectLabel Label)
     CARLA_GET_LABEL_STR(Bus)
     CARLA_GET_LABEL_STR(Train)
     CARLA_GET_LABEL_STR(Rider)
+    CARLA_GET_LABEL_STR(TurnSignalLeft)
+    CARLA_GET_LABEL_STR(TurnSignalRight)
+    CARLA_GET_LABEL_STR(BrakeLight)
+    CARLA_GET_LABEL_STR(HazardLights)
+    CARLA_GET_LABEL_STR(BrakeLeft)
+    CARLA_GET_LABEL_STR(BrakeRight)
+    CARLA_GET_LABEL_STR(BrakeHazard)
 
 #undef CARLA_GET_LABEL_STR
   }

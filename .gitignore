@@ -12,6 +12,7 @@ boost-*
 *.tar.gz
 
 .docker-home
+recordings/
 
 CrashContext.runtime-xml
 Diagnostics.txt

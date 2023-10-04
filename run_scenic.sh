@@ -1,3 +1,3 @@
 #!/bin/bash
-
-pip3 install -q ../Scenic/ && scenic Scenarios/TailLights.scenic --simulate --2d --time 150
+scenic_path='/home/carla/Scenic'
+pip3 install -q "$scenic_path/" && scenic "$scenic_path/scenarios/TailLights.scenic" --simulate --2d --time 150

@@ -7,7 +7,7 @@ docker run --rm --privileged --runtime=nvidia --gpus all --net=host --device=/de
 	-e QT_X11_NO_MITSHM=1 \
 	-e SDL_VIDEODRIVER=x11 \
 	-v "$PWD/docker_cache/shaders:/carla/home/.cache/mesa_shader_cache" \
-	-v "$PWD/../dataset:/home/carla/dataset" \
+	-v "$PWD/../recordings:/home/carla/recordings" \
 	-v "$PWD/../Scenic:/home/carla/Scenic" \
 	-v "$PWD:/home/carla/carla" \
 	-v "$PWD/../UE4.26:/home/carla/UE4.26" \

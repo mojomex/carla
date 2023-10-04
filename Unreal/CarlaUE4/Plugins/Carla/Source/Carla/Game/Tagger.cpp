@@ -113,11 +113,14 @@ void ATagger::TagActor(const AActor &Actor, bool bTagForSemanticSegmentation)
   for (UStaticMeshComponent *Component : StaticMeshComponents) {
     bool IsLight = Component->GetName().Contains(TEXT("light"), ESearchCase::IgnoreCase, ESearchDir::FromStart);
 
-    auto Label = crp::CityObjectLabel::None;
-    if (IsLight) {
-      Label = crp::CityObjectLabel::TurnSignalLeft;
-    } else {
-      Label = GetLabelByPath(Component->GetStaticMesh());
+    auto Label = GetLabelByPath(Component->GetStaticMesh());
+    bool IsVehicle = Label == crp::CityObjectLabel::Car ||
+                     Label == crp::CityObjectLabel::Truck ||
+                     Label == crp::CityObjectLabel::Bus ||
+                     Label == crp::CityObjectLabel::Motorcycle;
+
+    if (IsVehicle && IsLight) {
+      Label = crp::CityObjectLabel::HazardLights;
     }
 
     if (Label == crp::CityObjectLabel::Pedestrians &&
@@ -176,11 +179,14 @@ void ATagger::TagActor(const AActor &Actor, bool bTagForSemanticSegmentation)
   for (USkeletalMeshComponent *Component : SkeletalMeshComponents) {
     bool IsLight = Component->GetName().Contains(TEXT("light"), ESearchCase::IgnoreCase, ESearchDir::FromStart);
 
-    auto Label = crp::CityObjectLabel::None;
-    if (IsLight) {
-      Label = crp::CityObjectLabel::TurnSignalLeft;
-    } else {
-      Label = GetLabelByPath(Component->GetPhysicsAsset());
+    auto Label = GetLabelByPath(Component->GetPhysicsAsset());
+    bool IsVehicle = Label == crp::CityObjectLabel::Car ||
+                     Label == crp::CityObjectLabel::Truck ||
+                     Label == crp::CityObjectLabel::Bus ||
+                     Label == crp::CityObjectLabel::Motorcycle;
+
+    if (IsVehicle && IsLight) {
+      Label = crp::CityObjectLabel::HazardLights;
     }
 
     if (Label == crp::CityObjectLabel::Pedestrians &&

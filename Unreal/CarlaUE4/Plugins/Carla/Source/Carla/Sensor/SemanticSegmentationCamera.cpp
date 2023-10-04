@@ -6,7 +6,6 @@
 
 #include "Carla.h"
 #include "Carla/Sensor/SemanticSegmentationCamera.h"
-#include "Carla/Game/Tagger.h"
 
 #include "Carla/Sensor/PixelReader.h"
 

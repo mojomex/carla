@@ -17,3 +17,7 @@ rv-ltl ~= 0.1
 scipy ~= 1.7
 shapely ~= 2.0
 trimesh >=3.22.2, <4
+tqdm
+psutil
+termcolor
+pandas

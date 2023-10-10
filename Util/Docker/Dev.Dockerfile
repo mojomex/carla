@@ -114,7 +114,6 @@ COPY container_requirements.txt /home/carla/requirements.txt
 WORKDIR /home/carla
 RUN pip3 install -r requirements.txt
 
-
 RUN echo 'export PATH="/home/carla/.local/bin:$PATH"' >> .bashrc && echo "cd ~/carla && ./pip_install.sh && cd ~/carla" >> .bashrc
 
 WORKDIR /home/carla/carla

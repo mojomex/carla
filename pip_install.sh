@@ -6,5 +6,5 @@
     echo "Updating Scenic" &&
     pip3 install -q ../Scenic &&
     echo "Installing Requirements" &&
-    pip3 install -q -r requirements.txt)
+    pip3 install -q -r requirements-docker.txt)
 touch ~/.skipped_first

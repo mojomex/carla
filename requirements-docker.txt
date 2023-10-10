@@ -1,7 +1,7 @@
+
 tqdm
+psutil
 termcolor
-tables
 pandas
 numpy
 Pillow
- 

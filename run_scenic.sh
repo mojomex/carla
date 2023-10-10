@@ -1,3 +1,9 @@
 #!/bin/bash
-scenic_path='/home/carla/Scenic'
-pip3 install -q "$scenic_path/" && scenic "$scenic_path/scenarios/TailLights.scenic" --simulate --2d --time 150
+
+if [ -z "$1" ] 
+then
+  echo "Usage: $0 <scenic_path>"
+fi
+
+scenic_path=$1
+scenic "$scenic_path/scenarios/TailLights.scenic" --simulate --2d --time 160

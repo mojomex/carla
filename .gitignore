@@ -13,6 +13,7 @@ boost-*
 
 .docker-home
 recordings/
+Util/Docker/tmp_build/
 
 CrashContext.runtime-xml
 Diagnostics.txt
